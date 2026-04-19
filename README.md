@@ -12,6 +12,18 @@ This methodology inverts that. Source code is treated as a build artifact — an
 
 ---
 
+## A note on this project
+
+This repository is a conceptual exploration, not a production tool.
+
+It emerged from a conversation about where AI-assisted development is heading — specifically, what it would mean to treat human intent as the source of truth in software development, rather than source code. The documents here are an attempt to give that idea concrete form: a document format, a governed workflow, a set of agent roles. They are meant to be thought-provoking and useful as a starting point, not complete or battle-tested.
+
+Several more developed projects are working in adjacent territory — GitHub's Spec Kit, AWS Kiro, and others referenced in the related work section below. This project is not a competitor to those efforts. It is an independent exploration of the same underlying shift, with a particular focus on the governance and verification side of the problem that most current tools leave unaddressed.
+
+If you are looking for a production-ready spec-driven development tool, the projects listed above are further along. If you are interested in the ideas here — what intent-driven development could look like with a fully governed pipeline, independent compliance verification, and a formal document format — then this project is meant for you. Critique, contributions, and real-world experiments that stress-test these ideas are exactly what this project needs to mature.
+
+---
+
 ## The problem
 
 Current AI coding tools have three structural problems:
