@@ -1,53 +1,40 @@
-# CLAUDE.md — intent-driven-dev
+# Agent Instructions
 
-Read `WORKING_STYLE.md` at session start. It contains cross-project preferences that apply here.
+This project uses **bd** (beads) for issue tracking. Run `bd prime` for full workflow context.
 
----
-
-## Project
-
-A methodology and tooling framework for treating human intent as the source of truth in software development, with generated code as a downstream artifact. This repo contains the specification, schema, templates, examples, and agent prompts that define the methodology.
-
-There is no build, no test suite, and no linter. Quality gates from WORKING_STYLE.md still apply to documentation: audit for staleness before any push.
-
----
-
-## Issue Tracker
-
-GitHub Issues (`gh issue`). File an issue before starting any work item.
+## Quick Reference
 
 ```bash
-gh issue list
-gh issue create --title "..." --body "..."
-gh issue close <number>
+bd ready              # Find available work
+bd show <id>          # View issue details
+bd update <id> --claim  # Claim work atomically
+bd close <id>         # Complete work
+bd dolt push          # Push beads data to remote
 ```
 
----
+## Non-Interactive Shell Commands
 
-## Repo Structure
+**ALWAYS use non-interactive flags** with file operations to avoid hanging on confirmation prompts.
 
-```
-schema/               # JSON Schema definitions for structured formats
-templates/            # Blank templates for authors to fill in
-examples/             # Worked examples demonstrating the format
-```
+Shell commands like `cp`, `mv`, and `rm` may be aliased to include `-i` (interactive) mode on some systems, causing the agent to hang indefinitely waiting for y/n input.
 
----
-
-## Environment Note
-
-The `gh` CLI is installed at `C:\Program Files\GitHub CLI\` and may not be on PATH in bash sessions. Prepend to PATH before use:
-
+**Use these forms instead:**
 ```bash
-export PATH="$PATH:/c/Program Files/GitHub CLI"
+# Force overwrite without prompting
+cp -f source dest           # NOT: cp source dest
+mv -f source dest           # NOT: mv source dest
+rm -f file                  # NOT: rm file
+
+# For recursive operations
+rm -rf directory            # NOT: rm -r directory
+cp -rf source dest          # NOT: cp -r source dest
 ```
 
----
-
-## Methodology Constraints
-
-This repo follows the methodology it defines. Intent documents for the repo's own components live in `examples/` and must be kept current. The repo itself is the canonical demonstration that the methodology is self-applicable.
-
+**Other commands that may prompt:**
+- `scp` - use `-o BatchMode=yes` for non-interactive
+- `ssh` - use `-o BatchMode=yes` to fail instead of prompting
+- `apt-get` - use `-y` flag
+- `brew` - use `HOMEBREW_NO_AUTO_UPDATE=1` env var
 
 <!-- BEGIN BEADS INTEGRATION v:1 profile:minimal hash:ca08a54f -->
 ## Beads Issue Tracker
