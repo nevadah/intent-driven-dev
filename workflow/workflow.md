@@ -99,6 +99,8 @@ The author is responsible for an initial attempt at capturing intent. The docume
 
 The Elicitation Agent interviews the document rather than the author. It does not rewrite the document — it produces a structured report of what is unclear or absent. The author then revises the intent document in response. This loop repeats until the agent produces a clean report.
 
+**Loop escalation:** If the document has not produced a clean elicitation report after three passes, stop looping and escalate directly to Stage 5 · Engineering Review. A document that cannot clear elicitation after three attempts has a structural problem — continued iteration with the agent is unlikely to resolve it. The engineer reviews the document in its current state and provides direct guidance to the author before elicitation resumes.
+
 **Exit gate:** Elicitation report contains no unresolved flags. Author has addressed every item. The document re-passes schema validation after revisions.
 
 ---
@@ -151,7 +153,9 @@ On approval: the engineer's identity is added to `reviewers`. `status` advances 
 **Input:** Approved intent document (`status: approved`)  
 **Output:** Implementation
 
-The AI agent generates an implementation derived solely from the intent document. The intent document is the specification — the agent does not take additional instructions that are not captured in it.
+The AI agent generates an implementation from the intent document combined with a project-level configuration document. The intent document captures behavior — what the unit does, its contracts, its constraints. The project config captures environment — target language and framework, coding standards, repo layout conventions, shared dependencies. These are legitimately project-wide concerns that should not be repeated in every intent document.
+
+See [`templates/project-config.md`](../templates/project-config.md) for the project config template. Any instruction that applies to all code generation in the project belongs there; any instruction specific to this unit's behavior belongs in the intent document.
 
 **The generated code is read-only.** If a developer identifies a problem in the implementation, the correct response is to update the intent document and regenerate — not to edit the code directly. Manual edits break the chain: the code is no longer derived from the intent, the intent no longer reflects the implementation, and the compliance check becomes meaningless.
 
@@ -167,7 +171,7 @@ The AI agent generates an implementation derived solely from the intent document
 
 The Compliance Agent verifies the implementation against the intent document independently of test results. Tests written by the AI can confirm the AI's interpretation of the intent — they cannot confirm the intent was correctly captured. The Compliance Agent breaks this circularity by checking the implementation against the source of truth directly.
 
-If the compliance check fails, the implementation is regenerated (returning to Stage 6). Compliance failures do not trigger intent document updates unless the failure reveals a gap in the intent itself — in that case, the document returns to Stage 1 via the Intent Maintenance Agent.
+If the compliance check fails, the implementation is regenerated (returning to Stage 6). Compliance failures do not trigger intent document updates unless the failure reveals a gap in the intent itself — in that case, the document returns to Stage 1 via the Intent Maintenance Agent. The engineer who approved the intent document at Stage 5 is the decision-maker for whether a compliance failure is an implementation defect (regenerate) or an intent gap (update the document and re-enter the workflow).
 
 **Exit gate:** All behavioral contracts satisfied. All invariants hold. All quality attribute thresholds met or exceeded.
 
