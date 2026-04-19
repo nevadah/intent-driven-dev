@@ -12,18 +12,6 @@ There is no build, no test suite, and no linter. Quality gates from WORKING_STYL
 
 ---
 
-## Issue Tracker
-
-GitHub Issues (`gh issue`). File an issue before starting any work item.
-
-```bash
-gh issue list
-gh issue create --title "..." --body "..."
-gh issue close <number>
-```
-
----
-
 ## Repo Structure
 
 ```
@@ -36,10 +24,10 @@ examples/             # Worked examples demonstrating the format
 
 ## Environment Note
 
-The `gh` CLI is installed at `C:\Program Files\GitHub CLI\` and may not be on PATH in bash sessions. Prepend to PATH before use:
+The `gh` CLI and `bd` (Beads) may not be on PATH in bash sessions. Prepend both before use:
 
 ```bash
-export PATH="$PATH:/c/Program Files/GitHub CLI"
+export PATH="$PATH:/c/Program Files/GitHub CLI:/c/Users/Nevada/AppData/Local/Programs/bd"
 ```
 
 ---
