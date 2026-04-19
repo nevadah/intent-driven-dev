@@ -14,7 +14,7 @@ This methodology inverts that. Source code is treated as a build artifact — an
 
 ## A note on this project
 
-This repository is a conceptual exploration, not a production tool.
+This repository is a conceptual exploration, not a production tool. At least for now.
 
 It emerged from a conversation about where AI-assisted development is heading — specifically, what it would mean to treat human intent as the source of truth in software development, rather than source code. The documents here are an attempt to give that idea concrete form: a document format, a governed workflow, a set of agent roles. They are meant to be thought-provoking and useful as a starting point, not complete or battle-tested.
 
