@@ -1,0 +1,81 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "intent-document/v0.1.0",
+  "title": "Intent Document",
+  "description": "Frontmatter schema for an intent document. This is the machine-readable header of a .md intent file.",
+  "type": "object",
+  "required": ["unit", "version", "status", "author"],
+  "additionalProperties": false,
+  "properties": {
+    "unit": {
+      "type": "string",
+      "description": "Unique identifier for this intent unit. Slash-delimited path reflecting domain and capability. Must be stable across versions.",
+      "pattern": "^[a-z0-9-]+(/[a-z0-9-]+)+$",
+      "examples": ["auth/password-reset", "payments/refund-request", "notifications/email-dispatch"]
+    },
+    "version": {
+      "type": "string",
+      "description": "Semantic version of this intent document. Increment minor on non-breaking additions, major on breaking changes to behavioral contracts.",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$",
+      "examples": ["0.1.0", "1.0.0", "2.3.1"]
+    },
+    "status": {
+      "type": "string",
+      "description": "Lifecycle stage of this intent document.",
+      "enum": ["draft", "review", "approved", "deprecated"],
+      "enumDescriptions": {
+        "draft": "Work in progress. Not yet ready for review. Code must not be generated from this document.",
+        "review": "Complete and submitted for stakeholder or peer review. Code must not be generated from this document.",
+        "approved": "Reviewed and signed off. Code generation is permitted.",
+        "deprecated": "Superseded or removed. Generated code derived from this document should be considered legacy."
+      }
+    },
+    "author": {
+      "type": "string",
+      "description": "Identity of the primary author. Use a consistent format within a project (e.g. handle, email, or full name).",
+      "examples": ["nevada.hamaker", "alice@example.com"]
+    },
+    "reviewers": {
+      "type": "array",
+      "description": "Identities of reviewers who have approved this document. Empty until status reaches 'approved'.",
+      "items": { "type": "string" },
+      "default": []
+    },
+    "exposes": {
+      "type": "array",
+      "description": "Public interfaces this unit exposes. Used to build the interface contract graph. Should be precise enough for an agent to verify against the implementation.",
+      "items": { "type": "string" },
+      "examples": [
+        ["POST /auth/password-reset/request", "POST /auth/password-reset/redeem"],
+        ["UserCreatedEvent", "UserDeletedEvent"]
+      ]
+    },
+    "depends_on": {
+      "type": "array",
+      "description": "Other intent units this unit calls or relies on. Use the canonical unit identifier. An agent uses this to verify dependency boundaries and detect circular intent.",
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z0-9-]+(/[a-z0-9-]+)+$"
+      },
+      "examples": [["auth/password-policy", "notifications/email-dispatch"]]
+    },
+    "must_not_know": {
+      "type": "array",
+      "description": "Units or domains this unit must have zero knowledge of. Explicit boundary violations. An agent flags any implementation that imports or calls these.",
+      "items": { "type": "string" },
+      "examples": [["auth/oauth", "user/profile"]]
+    },
+    "supersedes": {
+      "type": "string",
+      "description": "The unit identifier and version this document replaces, if any. Format: 'unit@version'.",
+      "pattern": "^[a-z0-9-]+(/[a-z0-9-]+)+@[0-9]+\\.[0-9]+\\.[0-9]+$",
+      "examples": ["auth/password-reset@0.1.0"]
+    },
+    "tags": {
+      "type": "array",
+      "description": "Freeform labels for filtering, grouping, or discovery. Not used by agents for enforcement.",
+      "items": { "type": "string" },
+      "examples": [["security", "auth", "user-facing"]]
+    }
+  }
+}
