@@ -5,6 +5,8 @@ status: draft
 author: your.handle
 reviewers: []
 exposes:
+  # Machine-readable list of public interfaces. Mirrors the "Exposes" prose in Dependencies and
+  # Boundaries below — the frontmatter version is for tooling; the prose version adds explanation.
   - # e.g. POST /domain/capability, or an event name, or a public function signature
 depends_on:
   - # e.g. other/unit — use the canonical unit identifier from its intent document
@@ -18,6 +20,11 @@ tags: []
 <!-- One sentence: what does this unit do and for whom? -->
 
 ## Summary
+
+<!-- Scope guidance: one intent document should cover one independently deployable or testable
+     unit of behavior. Author at the feature or capability level — not the individual function
+     level (too narrow) and not the service level (too broad). If you cannot describe the unit's
+     behavior in a single paragraph without caveats, consider splitting it. -->
 
 [What this unit does, stated as the outcome it delivers. Not how it works — what it achieves. One short paragraph.]
 
@@ -65,11 +72,20 @@ tags: []
 ### Scenarios
 
 <!-- Use Gherkin. Each scenario must be independently understandable — no shared state
-     between scenarios unless a Background block is used. Cover: happy path, edge cases,
-     failure modes, and security-relevant paths. -->
+     between scenarios unless a Background block is used.
+
+     Coverage checklist — ensure at least one scenario exists for each category:
+     [ ] Happy path — the expected successful flow
+     [ ] Edge cases — boundary values, empty inputs, concurrent operations
+     [ ] Failure modes — each dependency failure, partial failures, rollback behavior
+     [ ] Security-relevant paths — authentication, authorization, enumeration, rate limiting
+
+     The Elicitation Agent will flag any uncovered category. -->
 
 ```gherkin
 Feature: [Capability Name]
+
+  # --- Happy path ---
 
   Scenario: [Happy path name]
     Given [initial state]
@@ -77,12 +93,23 @@ Feature: [Capability Name]
     Then [observable outcome]
     And [additional outcome]
 
+  # --- Edge cases ---
+
   Scenario: [Edge case name]
     Given [...]
     When [...]
     Then [...]
 
+  # --- Failure modes ---
+
   Scenario: [Failure mode name]
+    Given [...]
+    When [...]
+    Then [...]
+
+  # --- Security-relevant paths ---
+
+  Scenario: [Security scenario name]
     Given [...]
     When [...]
     Then [...]
@@ -123,6 +150,9 @@ failure_modes:
 - `other/unit` — [what specifically is used from this unit and why]
 
 **Exposes:**
+<!-- This prose list mirrors the machine-readable `exposes` field in the frontmatter.
+     The frontmatter version is for tooling; this version explains what each interface
+     provides and what callers can rely on. Both must be kept in sync. -->
 - `[interface]` — [what callers can expect from this interface]
 
 **Must not know about:**
