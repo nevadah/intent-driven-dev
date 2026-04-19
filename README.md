@@ -67,6 +67,36 @@ See [`agents/`](agents/) for ready-to-use system prompts for each agent.
 
 ---
 
+## Granularity: what one intent document covers
+
+One intent document should represent one independently deployable or testable unit of behavior. In practice this means authoring at the **feature or capability level**:
+
+- **Too narrow (function level):** An intent document per function produces hundreds of documents for a single feature, most of which have trivial behavioral contracts and no meaningful domain semantics. The overhead exceeds the benefit.
+- **Too broad (service level):** An intent document per service cannot be implemented atomically and produces a behavioral contract too large for an agent to implement correctly in one pass. It also makes the compliance check intractable.
+- **Right scope (feature / capability level):** A unit that can be specified, generated, and verified independently — one user-facing capability, one background job, one integration boundary, one domain operation.
+
+A useful heuristic: if you cannot describe the unit's complete behavior in the Scenarios section without it becoming unwieldy, the unit is probably too large and should be split.
+
+---
+
+## Where intent documents live
+
+Intent documents belong in an `intent/` directory at the repository root, with subdirectories mirroring domain boundaries:
+
+```
+intent/
+  auth/
+    password-reset.md
+    session-management.md
+  payments/
+    refund-request.md
+src/                    # generated code lives here as normal
+```
+
+The relationship between an intent document and its generated code should be traceable. The recommended convention is a matching path: `intent/auth/password-reset.md` generates into `src/auth/password-reset/`. If your project structure requires a different mapping, document it in a project-level config rather than in each intent document individually.
+
+---
+
 ## Why the Compliance Agent matters
 
 AI tools write code and tests together. When an AI implements something incorrectly, it tends to write tests that confirm the incorrect implementation. The test suite passes; the intent was never satisfied.
