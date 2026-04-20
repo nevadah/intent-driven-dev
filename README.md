@@ -8,7 +8,9 @@ A methodology for treating human intent as the source of truth in software devel
 
 In most projects, source code is the source of truth. Documentation, if it exists, describes the code. Tests verify what the code does. When something changes, the code changes first and everything else follows.
 
-This methodology inverts that. Source code is treated as a build artifact — analogous to a compiled binary or a Docker image — generated from something more fundamental: a structured, versioned, human-authored description of intent. The intent document is the source of truth. Code is generated from it. The code is never manually edited; doing so is equivalent to patching a compiled binary.
+Specifications play a role, of course, and in a disciplined organization the spec is updated and the code is changed in response. However, while the specification informs the code, it has historically been written for human consumption, and the engineers then make changes based on their understanding of the spec.
+
+This methodology inverts that. Source code is treated as a build artifact — analogous to a compiled binary or a Docker image — generated from something more fundamental: a structured, versioned, human-authored description of intent. The intent document is the source of truth. Code is generated from it. The code is never manually edited; doing so is equivalent to patching a compiled binary. In other words, this document acts as a specification authored by humans, but intended for consumption by an AI directly.
 
 ---
 
