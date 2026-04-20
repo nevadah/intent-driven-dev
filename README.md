@@ -10,7 +10,7 @@ In most projects, source code is the source of truth. Documentation, if it exist
 
 Specifications play a role, of course, and in a disciplined organization the spec is updated and the code is changed in response. However, while the specification informs the code, it has historically been written for human consumption, and the engineers then make changes based on their understanding of the spec.
 
-This methodology inverts that. Source code is treated as a build artifact — analogous to a compiled binary or a Docker image — generated from something more fundamental: a structured, versioned, human-authored description of intent. The intent document is the source of truth. Code is generated from it. The code is never manually edited; doing so is equivalent to patching a compiled binary. In other words, this document acts as a specification authored by humans, but intended for consumption by an AI directly.
+This methodology inverts that. Source code is treated as a build artifact that is analogous to a compiled binary or a Docker image and generated from something more fundamental: a structured, versioned, human-authored description of intent. The intent document is the source of truth. Code is generated from it. The code is never manually edited; doing so is equivalent to patching a compiled binary. In other words, this document acts as a specification authored by humans, but intended for consumption by an AI directly.
 
 ---
 
@@ -18,9 +18,9 @@ This methodology inverts that. Source code is treated as a build artifact — an
 
 This repository is a conceptual exploration, not a production tool. At least for now.
 
-It emerged from a conversation about where AI-assisted development is heading — specifically, what it would mean to treat human intent as the source of truth in software development, rather than source code. The documents here are an attempt to give that idea concrete form: a document format, a governed workflow, a set of agent roles. They are meant to be thought-provoking and useful as a starting point, not complete or battle-tested.
+It emerged from a conversation about where AI-assisted development is heading. Specifically, it was about what it would mean to treat human intent as the source of truth in software development, rather than source code. The documents here are an attempt to give that idea concrete form: a document format, a governed workflow, a set of agent roles. They are meant to be thought-provoking and useful as a starting point, not complete or battle-tested.
 
-Several more developed projects are working in adjacent territory — GitHub's Spec Kit, AWS Kiro, and others referenced in the related work section below. This project is not a competitor to those efforts. It is an independent exploration of the same underlying shift, with a particular focus on the governance and verification side of the problem that current tools may leave unaddressed.
+Several more developed projects are working in adjacent territory: GitHub's Spec Kit, AWS Kiro, and others referenced in the related work section below. This project is not a competitor to those efforts. It is an independent exploration of the same underlying shift, with a particular focus on the governance and verification side of the problem that current tools may leave unaddressed.
 
 If you are looking for a production-ready spec-driven development tool, the projects listed above are further along. If you are interested in the ideas here, what intent-driven development could look like with a fully governed pipeline, independent compliance verification, and a formal document format, then this project is meant for you. Critique, contributions, and real-world experiments that stress-test these ideas are exactly what this project needs to mature.
 
@@ -32,7 +32,7 @@ Current AI coding tools have three structural problems:
 
 **1. Intent evaporates.** When a session ends, the reasoning behind the code disappears. Institutional knowledge doesn't accumulate. The next session starts from the code, not from why the code is what it is.
 
-**2. Iteration happens at the wrong level.** When requirements change, AI tools generate new code — but the intent was never captured, so there's nothing to update. The new code reflects the new conversation, not a versioned record of what changed and why.
+**2. Iteration happens at the wrong level.** When requirements change, AI tools generate new code. But the intent was never captured, so there's nothing to update. The new code reflects the new conversation, not a versioned record of what changed and why.
 
 **3. Ambiguity is invisible.** AI tools accept natural language and generate confident implementations. When the language is ambiguous, the model makes a silent interpretive choice. Nobody agreed to it; it just becomes the code.
 
@@ -74,7 +74,7 @@ Four AI agents enforce and assist the process:
 |---|---|---|
 | **Elicitation Agent** | After authoring | Interviews the draft document, flags ambiguities, underspecified edge cases, and missing scenarios |
 | **Intent Review Agent** | After elicitation | Stress-tests the document for internal contradictions, impossible postconditions, and boundary violations |
-| **Compliance Agent** | After code generation | Verifies the implementation satisfies the intent document — independently of the test suite |
+| **Compliance Agent** | After code generation | Verifies the implementation satisfies the intent document independently of the test suite |
 | **Intent Maintenance Agent** | Before any change | Ensures the intent document is updated before code changes; flags breaking changes and conflicts |
 
 See [`agents/`](agents/) for ready-to-use system prompts for each agent.
@@ -87,7 +87,7 @@ One intent document should represent one independently deployable or testable un
 
 - **Too narrow (function level):** An intent document per function produces hundreds of documents for a single feature, most of which have trivial behavioral contracts and no meaningful domain semantics. The overhead exceeds the benefit.
 - **Too broad (service level):** An intent document per service cannot be implemented atomically and produces a behavioral contract too large for an agent to implement correctly in one pass. It also makes the compliance check intractable.
-- **Right scope (feature / capability level):** A unit that can be specified, generated, and verified independently — one user-facing capability, one background job, one integration boundary, one domain operation.
+- **Right scope (feature / capability level):** A unit that can be specified, generated, and verified independently. One user-facing capability, one background job, one integration boundary, one domain operation.
 
 A useful heuristic: if you cannot describe the unit's complete behavior in the Scenarios section without it becoming unwieldy, the unit is probably too large and should be split.
 
