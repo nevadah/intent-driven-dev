@@ -22,7 +22,7 @@ It emerged from a conversation about where AI-assisted development is heading �
 
 Several more developed projects are working in adjacent territory — GitHub's Spec Kit, AWS Kiro, and others referenced in the related work section below. This project is not a competitor to those efforts. It is an independent exploration of the same underlying shift, with a particular focus on the governance and verification side of the problem that current tools may leave unaddressed.
 
-If you are looking for a production-ready spec-driven development tool, the projects listed above are further along. If you are interested in the ideas here — what intent-driven development could look like with a fully governed pipeline, independent compliance verification, and a formal document format — then this project is meant for you. Critique, contributions, and real-world experiments that stress-test these ideas are exactly what this project needs to mature.
+If you are looking for a production-ready spec-driven development tool, the projects listed above are further along. If you are interested in the ideas here, what intent-driven development could look like with a fully governed pipeline, independent compliance verification, and a formal document format, then this project is meant for you. Critique, contributions, and real-world experiments that stress-test these ideas are exactly what this project needs to mature.
 
 ---
 
@@ -115,7 +115,7 @@ The relationship between an intent document and its generated code should be tra
 
 AI tools write code and tests together. When an AI implements something incorrectly, it tends to write tests that confirm the incorrect implementation. The test suite passes; the intent was never satisfied.
 
-The Compliance Agent breaks this circularity. It verifies the implementation against the intent document — a source of truth the AI did not produce — independently of whether the tests pass. This is the only reliable way to catch the class of error where the AI was confidently wrong about what was asked.
+The Compliance Agent breaks this circularity. It verifies the implementation against the intent document, a source of truth the AI did not produce, independently of whether the tests pass. This is the only reliable way to catch the class of error where the AI was confidently wrong about what was asked.
 
 ---
 
@@ -157,6 +157,6 @@ agents/                         # Agent system prompts
 
 ## Status
 
-Early-stage. The format, workflow, and agent prompts are a first version — usable, but expected to evolve as they are applied to real projects. Open questions include the right granularity for intent documents, how breaking changes to intent propagate through a dependency graph, and how this integrates with existing CI/CD tooling.
+Early-stage. The format, workflow, and agent prompts are a first version. They are usable, but expected to evolve as they are applied to real projects. Open questions include the right granularity for intent documents, how breaking changes to intent propagate through a dependency graph, and how this integrates with existing CI/CD tooling.
 
 Contributions and feedback welcome.
