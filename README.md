@@ -20,7 +20,7 @@ This repository is a conceptual exploration, not a production tool. At least for
 
 It emerged from a conversation about where AI-assisted development is heading. Specifically, it was about what it would mean to treat human intent as the source of truth in software development, rather than source code. The documents here are an attempt to give that idea concrete form: a document format, a governed workflow, a set of agent roles. They are meant to be thought-provoking and useful as a starting point, not complete or battle-tested.
 
-The conversation was sparked by a post on LinkedIn from Jim Honeycutt: https://www.linkedin.com/posts/jimhoneycutt_code-is-no-longer-the-source-of-truth-it-activity-7450305910834454529-FnjW/.
+The conversation was sparked by a post on LinkedIn from Jim Honeycutt: https://www.linkedin.com/posts/jimhoneycutt_code-is-no-longer-the-source-of-truth-it-activity-7450305910834454529-FnjW/. The discussion in the comments for that post is robust and worth considering.
 
 Several more developed projects are working in adjacent territory: GitHub's Spec Kit, AWS Kiro, and others referenced in the related work section below. This project is not a competitor to those efforts. It is an independent exploration of the same underlying shift, with a particular focus on the governance and verification side of the problem that current tools may leave unaddressed.
 
