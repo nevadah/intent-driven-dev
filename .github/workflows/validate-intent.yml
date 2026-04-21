@@ -9,11 +9,6 @@ on:
       - 'schema/**'
       - 'scripts/validate-intent.py'
   pull_request:
-    paths:
-      - 'examples/**'
-      - 'intent/**'
-      - 'schema/**'
-      - 'scripts/validate-intent.py'
 
 jobs:
   validate:
