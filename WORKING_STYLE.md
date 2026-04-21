@@ -20,6 +20,35 @@ Placing this content in the appropriate global config means it applies without c
 
 ---
 
+## Repository Setup
+
+**.gitignore defaults** — Add these to every project that uses the relevant tools:
+
+```
+.beads/              # Beads local database — not source-controlled
+.claude/settings.local.json   # Claude Code personal settings
+```
+
+---
+
+## Branch Protection
+
+Standard settings for a **solo public repository**:
+
+| Rule | Value |
+|---|---|
+| Require status checks (strict) | Yes — the project's CI check |
+| Enforce on admins | Yes |
+| Allow force pushes | No |
+| Allow deletions | No |
+| Required approving reviews | 0 (solo); bump to 1 when collaborators are added |
+
+**Setup order:** Create the CI workflow first and let it run successfully on the default branch before adding it as a required status check. Setting a required check before the workflow exists blocks all merges.
+
+If collaborators are added later, enable: required approving reviews: 1, dismiss stale reviews: on, require last-push approval: on.
+
+---
+
 ## Branch Hygiene
 
 Before starting any new branch:
@@ -68,6 +97,14 @@ bd create \
 ```
 
 Beads-specific: use `bd remember "insight"` for persistent knowledge across sessions; run `bd dolt push` as part of every session close.
+
+`bd` may not be on PATH in bash sessions. Prepend before use:
+
+```bash
+export PATH="$PATH:/c/Users/Nevada/AppData/Local/Programs/bd"
+```
+
+Keep `.beads/` in `.gitignore` — the Beads database is local. `bd dolt push` handles remote sync if configured.
 
 ---
 
