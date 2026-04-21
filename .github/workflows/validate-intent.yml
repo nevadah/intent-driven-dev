@@ -1,0 +1,33 @@
+name: Validate Intent Documents
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'examples/**'
+      - 'intent/**'
+      - 'schema/**'
+      - 'scripts/validate-intent.py'
+  pull_request:
+    paths:
+      - 'examples/**'
+      - 'intent/**'
+      - 'schema/**'
+      - 'scripts/validate-intent.py'
+
+jobs:
+  validate:
+    name: Validate intent documents
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
+        run: pip install jsonschema pyyaml
+
+      - name: Validate intent document frontmatter
+        run: python scripts/validate-intent.py
