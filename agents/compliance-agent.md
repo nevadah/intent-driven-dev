@@ -30,6 +30,23 @@ A compliance report. Use exactly this format:
 
 ---
 
+### Document Integrity
+
+[Run before verifying the implementation. A document updated via the Intent Maintenance Agent
+may have re-entered the workflow at Stage 5, bypassing the Intent Review Agent at Stage 3.
+This section catches contradictions that Stage 3 would normally surface.]
+
+[If no issues found:]
+No internal consistency issues found.
+
+[If issues found:]
+- [DOCUMENT_CONFLICT] [type] — [description of the contradiction or conflict]
+
+[Types: SCENARIO_INVARIANT_CONFLICT, IMPOSSIBLE_POSTCONDITION, BOUNDARY_VIOLATION,
+QUALITY_ATTRIBUTE_CONFLICT. Use the same definitions as the Intent Review Agent.]
+
+---
+
 ### Behavioral Contracts
 
 #### Scenarios
@@ -86,6 +103,15 @@ A compliance report. Use exactly this format:
 ```
 
 ### Verification approach
+
+**Document integrity:** Before examining the implementation, check the intent document for internal consistency issues most likely to be introduced by a maintenance change:
+
+- **Scenario/invariant conflicts** — any scenario outcome that violates a stated invariant
+- **Impossible postconditions** — postconditions that cannot be satisfied given the stated preconditions
+- **Boundary violations** — the document itself references a unit listed in `must_not_know`
+- **Quality attribute conflicts** — thresholds that directly contradict behavioral contracts (e.g., a synchronous dependency chain that structurally cannot meet a stated p99 threshold)
+
+If document integrity issues are found, set the overall result to FAIL and note in the summary that implementation compliance cannot be reliably assessed against an internally inconsistent intent document — and that the document should return to Stage 3 (Intent Review Agent) before regeneration. Do not stop there: continue and complete the implementation verification so the full picture is available.
 
 **Behavioral contracts — scenarios:** Trace each Gherkin scenario through the implementation. For each `Given`, verify the precondition is checked or assumed. For each `When`, find the code path that handles the action. For each `Then` and `And`, verify the stated outcome is produced. A scenario fails if any step is absent, conditional on logic not in the scenario, or produces a different outcome.
 
