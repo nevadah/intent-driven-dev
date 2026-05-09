@@ -26,6 +26,8 @@ Several more developed projects are working in adjacent territory: GitHub's Spec
 
 If you are looking for a production-ready spec-driven development tool, the projects listed above are further along. If you are interested in the ideas here, what intent-driven development could look like with a fully governed pipeline, independent compliance verification, and a formal document format, then this project is meant for you. Critique, contributions, and real-world experiments that stress-test these ideas are exactly what this project needs to mature.
 
+One further note: this repository was developed primarily through Claude Code, Anthropic's AI development tool, working from the author's direction and decisions. The format, workflow, agent prompts, and examples here are substantially AI-produced artifacts shaped by human intent. Whether that makes this project a live demonstration of its own premise, or simply an irony, is left to the reader — but it seemed worth stating plainly.
+
 ---
 
 ## The problem
