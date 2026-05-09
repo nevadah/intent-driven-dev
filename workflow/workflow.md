@@ -201,13 +201,32 @@ The intent document is always updated before any code changes. There is no path 
 
 ---
 
-## Two Review Seams
+## Review Seams
 
-The workflow has two deliberate human checkpoints, each asking a different question:
+The workflow has three deliberate human checkpoints, each closing a different gap:
 
-| Seam | Stage | Actor | Question |
+| Seam | Stage | Actor | Gap closed |
 |---|---|---|---|
-| Business → Engineering | Stage 4 | Business stakeholder | Is this what the business needs? |
-| Engineering → AI | Stage 5 | Engineer | Is this precise enough to implement correctly? |
+| Business → Engineering | Stage 4 | Business stakeholder | Does the spec reflect the business need? |
+| Engineering → AI | Stage 5 | Engineer | Is the spec precise enough to implement correctly? |
+| Implementation → Reality | Post-deploy | Human tester | Does the running system serve the actual human need? |
 
-Separating these seams is intentional. A business stakeholder should not be asked to evaluate technical precision. An engineer should not be asked to validate business intent. Conflating them produces reviews that satisfy neither concern.
+The first two seams are internal to the workflow and gate whether generation proceeds. The third is external — it happens after deployment and is not automated.
+
+**Who counts as a tester:** "Human tester" here refers to any person who exercises the final software with evaluative intent — not a role title or organizational function. This includes dedicated QA teams, end users evaluating the software before adoption, contractors providing testing services, or any stakeholder who has occasion to use the product. The defining characteristic is that they are assessing whether the software serves the actual need. What they surface is either a deficiency in the intent (something the spec should have said but didn't) or a refinement (something the spec got right but could be better). Both re-enter the workflow as change requests to the Intent Maintenance Agent.
+
+**Compliance Agent vs human tester:** The Compliance Agent at Stage 7 closes the implementation/spec gap: it verifies that the generated code does what the intent document says. Human testers close a different gap: they verify that what the spec says is what users actually need. A system can pass compliance and fail human evaluation. When it does, the correct response is to update the intent document — not the code — and re-enter the workflow via the Intent Maintenance Agent.
+
+Separating these concerns is intentional. A business stakeholder should not evaluate technical precision. An engineer should not validate business intent. A compliance agent cannot evaluate whether the spec captured the right need. Conflating any of these produces reviews that satisfy none of the concerns.
+
+---
+
+## Methodology Scope
+
+The elicitation and review stages surface gaps that are detectable from the intent document. They cannot surface requirements the author did not know to include — things absent because they were never articulated, not because they were articulated poorly.
+
+This class of gap — unknown unknowns — is only caught by human evaluation of running software. It is why the third review seam exists and why it cannot be automated: the gap becomes visible only when a person uses the system and finds it lacking.
+
+When this happens, the finding re-enters the workflow as a change request to the Intent Maintenance Agent. The intent document is updated before any code changes — the same rule that applies to all changes.
+
+The implication: intent documents will always be incomplete in ways that cannot be predicted in advance. The goal of elicitation and agent review is not theoretical completeness — it is to minimize the gaps catchable before generation, so that what remains are the genuinely novel gaps that only emerge from use.
