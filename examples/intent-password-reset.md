@@ -182,3 +182,30 @@ A pure magic link (clicked link logs user in directly) conflates reset with auth
 
 **One valid token per account**
 Allowing multiple valid tokens widens the window for inbox-compromise attacks and creates ambiguity about which request was most recent. Invalidating prior tokens on new request is a minor UX cost with a clear security benefit.
+
+---
+
+## Changelog
+
+```yaml
+- version: 0.1.0
+  date: 2026-05-08
+  classification: initial
+  changed_by: nevada.hamaker
+  changes: []
+  reason: Initial approved version.
+
+- version: 0.2.0
+  date: 2026-05-08
+  classification: non-breaking
+  changed_by: nevada.hamaker
+  changes:
+    - "[MODIFIED] Invariants — Token expiry window extended from 60 to 90 minutes"
+    - "[ADDED] Scenario: Rate limit per IP exceeded — missing security scenario added"
+  reason: >
+    Support data showed 18% of reset requests were abandoned after token expiry,
+    predominantly from mobile users checking email on a delay. Extended to 90 minutes
+    after confirming the security team accepted the wider window given the existing
+    per-email rate limiting. Rate limit IP scenario added after elicitation review of
+    auth/session flagged the gap.
+```

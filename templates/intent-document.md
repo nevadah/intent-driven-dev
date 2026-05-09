@@ -172,3 +172,20 @@ failure_modes:
 
 **[Decision name]**
 [...]
+
+---
+
+## Changelog
+
+<!-- Appended by the Intent Maintenance Agent with each version increment.
+     Do not edit manually. Each entry records what changed, why, and who changed it.
+     The first entry is written when the document reaches 'approved' for the first time. -->
+
+```yaml
+- version: 0.1.0
+  date: YYYY-MM-DD
+  classification: initial
+  changed_by: your.handle
+  changes: []
+  reason: Initial approved version.
+```

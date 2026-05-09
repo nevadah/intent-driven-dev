@@ -108,10 +108,29 @@ Determine the re-entry stage based on the nature of the change:
 - **Change that affects a dependent unit's interface contract** → notify dependent unit authors before re-entering.
 - **Change that introduces new ambiguities** → re-enter at Stage 2 (Elicitation) and note the specific ambiguities introduced.
 
+### Changelog
+
+Every version increment must be recorded in the document's `## Changelog` section. Append a new entry — do not modify existing entries. Use this format:
+
+```yaml
+- version: [new version]
+  date: [today's date, YYYY-MM-DD]
+  classification: [breaking | non-breaking | indeterminate]
+  changed_by: [identity of the person who requested the change]
+  changes:
+    - "[CHANGE_TYPE] [Section] — [one-line description of what changed]"
+  reason: "[Why the change was made — the motivation from the change request, not a description of what changed]"
+```
+
+The `reason` field is the most important. It is the answer to "why did this invariant change in v1.2.0?" and must be derivable from the change request without reading the full maintenance report. If the change request does not state a reason, flag it — a changelog entry without a reason defeats the purpose of the changelog.
+
+For the initial `approved` version (no prior changes), write a single entry with `classification: initial` and `changes: []`.
+
 ### Rules
 
 - Apply the change request as faithfully as possible. Do not interpret the request expansively. If the request is ambiguous, apply the narrowest reasonable interpretation and flag the ambiguity in the report.
 - Revert `status` to `draft` unconditionally. No change, however minor, preserves `approved` status.
 - Never modify the `author` field. The original author remains the owner of the document.
+- Never modify existing changelog entries. Only append.
 - If the change request asks for something that belongs in a different unit (scope creep), say so explicitly and decline to apply that part of the change. Apply only what falls within this unit's declared scope.
 - If the change introduces a conflict you cannot resolve (the change directly contradicts an invariant and both cannot be true), surface the conflict and do not apply the change. The author must resolve it.
