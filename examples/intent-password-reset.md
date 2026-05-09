@@ -198,6 +198,7 @@ Allowing multiple valid tokens widens the window for inbox-compromise attacks an
 - version: 0.2.0
   date: 2026-05-08
   classification: non-breaking
+  trigger: stakeholder_request
   changed_by: nevada.hamaker
   changes:
     - "[MODIFIED] Invariants — Token expiry window extended from 60 to 90 minutes"
