@@ -1,4 +1,6 @@
 PROJECT BRIEFING: AI-Native Development Methodology
+
+> **Historical document.** This file captures the project's starting point and is preserved as context for how the methodology originated. References to "Intent-Driven Development (IDD)" reflect the terminology used at inception. The methodology is now named Governed Intent Development.
 Core Concept
 A new software development methodology built on two linked ideas:
 
