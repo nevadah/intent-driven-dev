@@ -1,4 +1,4 @@
-# Contributing to Intent-Driven Development
+# Contributing to Governed Intent Development
 
 This repo defines a methodology. Contributing means proposing changes to the methodology itself — its document format, workflow, agent prompts, or examples. This is different from contributing to a software project: the artifacts here are specifications, not code.
 
