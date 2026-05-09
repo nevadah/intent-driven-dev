@@ -213,6 +213,8 @@ The workflow has three deliberate human checkpoints, each closing a different ga
 
 The first two seams are internal to the workflow and gate whether generation proceeds. The third is external — it happens after deployment and is not automated.
 
+**Who counts as a tester:** "Human tester" here refers to any person who exercises the final software with evaluative intent — not a role title or organizational function. This includes dedicated QA teams, end users evaluating the software before adoption, contractors providing testing services, or any stakeholder who has occasion to use the product. The defining characteristic is that they are assessing whether the software serves the actual need. What they surface is either a deficiency in the intent (something the spec should have said but didn't) or a refinement (something the spec got right but could be better). Both re-enter the workflow as change requests to the Intent Maintenance Agent.
+
 **Compliance Agent vs human tester:** The Compliance Agent at Stage 7 closes the implementation/spec gap: it verifies that the generated code does what the intent document says. Human testers close a different gap: they verify that what the spec says is what users actually need. A system can pass compliance and fail human evaluation. When it does, the correct response is to update the intent document — not the code — and re-enter the workflow via the Intent Maintenance Agent.
 
 Separating these concerns is intentional. A business stakeholder should not evaluate technical precision. An engineer should not validate business intent. A compliance agent cannot evaluate whether the spec captured the right need. Conflating any of these produces reviews that satisfy none of the concerns.
