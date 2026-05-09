@@ -1,4 +1,4 @@
-# Intent-Driven Development Workflow
+# Governed Intent Development Workflow
 
 ## Overview
 

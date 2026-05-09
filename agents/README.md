@@ -1,6 +1,6 @@
 # Agent Prompts
 
-Starter system prompts for the four agents in the intent-driven development pipeline. Each file is self-contained and usable directly as a system prompt.
+Starter system prompts for the four agents in the Governed Intent Development pipeline. Each file is self-contained and usable directly as a system prompt.
 
 | Agent | File | Workflow stage |
 |---|---|---|

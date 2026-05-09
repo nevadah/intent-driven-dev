@@ -1,4 +1,4 @@
-# Intent-Driven Development
+# Governed Intent Development
 
 A methodology for treating human intent as the source of truth in software development, with generated code as a downstream artifact.
 
@@ -24,7 +24,7 @@ The conversation was sparked by a post on LinkedIn from Jim Honeycutt: https://w
 
 Several more developed projects are working in adjacent territory: GitHub's Spec Kit, AWS Kiro, and others referenced in the related work section below. This project is not a competitor to those efforts. It is an independent exploration of the same underlying shift, with a particular focus on the governance and verification side of the problem that current tools may leave unaddressed.
 
-If you are looking for a production-ready spec-driven development tool, the projects listed above are further along. If you are interested in the ideas here, what intent-driven development could look like with a fully governed pipeline, independent compliance verification, and a formal document format, then this project is meant for you. Critique, contributions, and real-world experiments that stress-test these ideas are exactly what this project needs to mature.
+If you are looking for a production-ready spec-driven development tool, the projects listed above are further along. If you are interested in the ideas here, what Governed Intent Development could look like with a fully governed pipeline, independent compliance verification, and a formal document format, then this project is meant for you. Critique, contributions, and real-world experiments that stress-test these ideas are exactly what this project needs to mature.
 
 One further note: this repository was developed primarily through Claude Code, Anthropic's AI development tool, working from the author's direction and decisions. The format, workflow, agent prompts, and examples here are substantially AI-produced artifacts shaped by human intent. Whether that makes this project a live demonstration of its own premise, or simply an irony, is left to the reader — but it seemed worth stating plainly.
 
@@ -129,9 +129,11 @@ The Compliance Agent breaks this circularity. It verifies the implementation aga
 
 **Change Intent Records (CIRs)** — Lightweight records of why a change was made, analogous to ADRs. Useful for the rationale layer of an intent document, but not a full methodology. No workflow, no agents, no behavioral contracts.
 
-**Intent-Driven Development (IDD)** — The term is in use across several contexts, generally meaning "start with intent before writing code." This methodology gives that principle a concrete structure: a specific document format, a specific workflow with enforced gates, and a specific agent pipeline.
+**Intent-Driven Development (IDD)** — The term is in use across several contexts, generally meaning "start with intent before writing code." Governed Intent Development is a specific instance of this principle. The "governed" qualifier is the distinguishing characteristic: a formal document format with an enforced lifecycle, staged workflow gates, and an agent pipeline that closes the loop between intent and implementation. Looser interpretations of "intent-driven" share the starting point but not the structure.
 
 The distinguishing combination: **structured intent format + governed workflow + agent pipeline + read-only generated code**, as a single coherent system.
+
+**On the name:** "Governed Intent Development" was chosen to distinguish this methodology from the broader intent-driven development concept and to surface its defining characteristic — the governance layer. It may change as the methodology matures.
 
 ---
 
