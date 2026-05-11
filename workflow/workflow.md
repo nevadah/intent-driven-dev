@@ -175,6 +175,8 @@ If the compliance check fails, the implementation is regenerated (returning to S
 
 **Exit gate:** All behavioral contracts satisfied. All invariants hold. All quality attribute thresholds met or exceeded.
 
+See [`workflow/ci-cd-integration.md`](ci-cd-integration.md) for how to run the compliance check as a CI gate and integrate intent document status with branch protection rules.
+
 ---
 
 ## Handling Changes
