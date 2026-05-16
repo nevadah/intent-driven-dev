@@ -76,9 +76,10 @@ Four AI agents enforce and assist the process:
 
 | Agent | Stage | Role |
 |---|---|---|
-| **Elicitation Agent** | After authoring | Interviews the draft document, flags ambiguities, underspecified edge cases, and missing scenarios |
+| **Elicitation Agent** | After authoring | Interviews the draft document, flags ambiguities, underspecified edge cases, and missing coverage — including security-specific gaps |
 | **Intent Review Agent** | After elicitation | Stress-tests the document for internal contradictions, impossible postconditions, and boundary violations |
 | **Compliance Agent** | After code generation | Verifies the implementation satisfies the intent document independently of the test suite |
+| **Security Agent** | After compliance | Performs an adversarial security audit of the generated code, finding vulnerability classes not covered by the compliance check |
 | **Intent Maintenance Agent** | Before any change | Ensures the intent document is updated before code changes; flags breaking changes and conflicts |
 
 See [`agents/`](agents/) for ready-to-use system prompts for each agent.
@@ -156,6 +157,7 @@ agents/                         # Agent system prompts
   elicitation-agent.md
   review-agent.md
   compliance-agent.md
+  security-agent.md
   maintenance-agent.md
 ```
 

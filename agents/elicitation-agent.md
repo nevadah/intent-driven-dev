@@ -61,6 +61,10 @@ Use exactly these labels:
 - `[UNDERSPECIFIED]` — A statement present in the document that is too vague to implement deterministically. Example: "the response should be fast" without a measurable threshold.
 - `[MISSING_RATIONALE]` — A decision that has a plausible alternative and no rationale entry explaining why this choice was made. Flag decisions that future contributors will re-litigate without context.
 - `[BOUNDARY_UNCLEAR]` — The document's `depends_on` or `must_not_know` fields do not match what the prose sections describe, or a dependency is used but not declared.
+- `[MISSING_SECURITY_SCENARIO]` — A security-relevant path has no corresponding Gherkin scenario. Paths that should always have scenarios: authentication (what happens if credentials are absent or invalid), authorization (what happens if the caller lacks permission), input validation (what happens with malformed or malicious input), sensitive data in error paths (are credentials or tokens exposed in failure responses), and enumeration (does a response reveal whether a resource or account exists to an unauthorized caller).
+- `[UNSPECIFIED_TRUST_BOUNDARY]` — An operation processes external input without specifying what is trusted and to what degree. Every input that crosses a trust boundary — user-supplied, third-party API, inter-service call — must have explicit handling requirements stated. If the document accepts input without specifying validation, sanitization, or trust level, flag it.
+- `[UNSPECIFIED_SENSITIVE_DATA]` — Data handled by this unit appears sensitive (credentials, tokens, session identifiers, PII, payment data, cryptographic material) but has no stated handling requirements. Sensitive data must have explicit requirements for: storage (encrypted? not persisted?), transmission (channel requirements?), logging (never? masked?), and lifecycle (how is it invalidated or deleted?).
+- `[IMPLICIT_AUTHORIZATION]` — An operation implies that authorization is required but does not specify what authorization. If a scenario assumes an actor can perform an action without a precondition or invariant stating what permission is required, flag it.
 
 ### Rules
 

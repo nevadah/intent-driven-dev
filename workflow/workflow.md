@@ -64,7 +64,14 @@ flowchart TD
         I1 -- Yes --> J
     end
 
-    J([Complete])
+    subgraph SECURITY ["Stage 8 · Security Audit"]
+        J[Security Agent audits implementation\nadversarially]
+        J --> J1{Vulnerability\nfindings?}
+        J1 -- "Yes: update intent\n+ regenerate" --> B
+        J1 -- No --> K
+    end
+
+    K([Complete])
 
     style AUTHORING fill:#f0f4ff,stroke:#c0c8e8
     style ELICITATION fill:#f0f4ff,stroke:#c0c8e8
@@ -73,6 +80,7 @@ flowchart TD
     style ENG_REVIEW fill:#fff4e0,stroke:#e8d0a0
     style GENERATION fill:#f0fff4,stroke:#a0e8b0
     style COMPLIANCE fill:#f0fff4,stroke:#a0e8b0
+    style SECURITY fill:#fff0f0,stroke:#e8a0a0
 ```
 
 ---
@@ -176,6 +184,26 @@ If the compliance check fails, the implementation is regenerated (returning to S
 **Exit gate:** All behavioral contracts satisfied. All invariants hold. All quality attribute thresholds met or exceeded.
 
 See [`workflow/ci-cd-integration.md`](ci-cd-integration.md) for how to run the compliance check as a CI gate and integrate intent document status with branch protection rules.
+
+---
+
+### Stage 8 · Security Audit
+
+**Actor:** Security Agent  
+**Input:** Approved intent document + generated implementation  
+**Output:** Security audit report — vulnerability findings and unverifiable items
+
+The Security Agent performs an adversarial audit of the generated implementation, checking for vulnerability classes that the Compliance Agent does not cover. The Compliance Agent verifies that the code matches what the intent document declares. The Security Agent checks for security properties that may not be declared — injection surfaces, authentication gaps, sensitive data exposure, cryptographic weaknesses, and other patterns from a standard security checklist.
+
+This stage catches two distinct problems. First, intent gaps: the implementation correctly reflects the intent document, but the intent document failed to specify a security requirement. These findings route back to the intent document via the Intent Maintenance Agent — the security property is added to the intent, and the code is regenerated. Second, implementation defects: the intent document specifies a security requirement but the generated code violates it. These findings route directly to regeneration.
+
+**Finding types:**
+- `VULNERABILITY` — a statically detectable security defect; blocks completion; routes to intent update + regeneration (if intent gap) or regeneration (if implementation defect)
+- `UNVERIFIABLE` — requires runtime testing, fuzzing, or penetration testing to confirm; does not block completion; documented for pre-production verification
+
+**On model selection:** This stage benefits from models with security research specialization. See [`agents/security-agent.md`](../agents/security-agent.md) for guidance.
+
+**Exit gate:** No `VULNERABILITY` findings. `UNVERIFIABLE` items documented and assigned for runtime verification.
 
 ---
 

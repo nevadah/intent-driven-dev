@@ -141,6 +141,24 @@ failure_modes:
 
 ---
 
+## Security Model
+
+<!-- Document the security context this unit operates in. This section is used by the
+     Elicitation Agent to check for missing security scenarios and by the Security Agent
+     to scope its adversarial audit. Remove subsections that are not applicable. -->
+
+**Threat actors:** [Who might attempt to misuse or attack this unit? Examples: unauthenticated external users, authenticated users acting outside their permissions, other services in the system, operators with elevated access.]
+
+**Trust boundaries:** [What inputs does this unit receive from untrusted sources? What is validated, and by whom, before it arrives here?]
+
+**Sensitive data handled:** [List any sensitive data this unit processes — credentials, tokens, PII, payment data, cryptographic material. For each, state the handling requirement: not persisted / encrypted at rest / never logged / masked in responses / etc.]
+
+**Security responsibilities of this unit:** [What security properties is this unit explicitly responsible for enforcing?]
+
+**Explicitly out of scope:** [Security concerns this unit is NOT responsible for — handled by a dependency, an API gateway, or a different unit. Being explicit prevents double-implementation and clarifies the Security Agent's audit scope.]
+
+---
+
 ## Dependencies and Boundaries
 
 <!-- Expand on the structured depends_on / must_not_know fields in the frontmatter.
